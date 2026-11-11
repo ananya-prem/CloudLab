@@ -3,109 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Sample Website</title>
+    <title>My Flask Website</title>
     <style>
-        /* Basic Reset & Styling */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f4f4f9;
-        }
-        /* Header & Navigation */
-        header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1.5rem;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        /* Hero Section */
-        .hero {
-            background: #3498db;
-            color: #fff;
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .btn {
-            display: inline-block;
-            background: #2c3e50;
-            color: #fff;
-            padding: 0.7rem 1.5rem;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 1rem;
-        }
-        /* Main Content */
-        main {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-        section {
-            background: #fff;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h2 {
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-        /* Contact Form */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        input, textarea {
-            padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        button {
-            background: #3498db;
-            color: #fff;
-            border: none;
-            padding: 0.8rem;
-            font-size: 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 1.5rem;
-            background: #2c3e50;
-            color: #fff;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { line-height: 1.6; color: #333; background-color: #f4f4f9; }
+        header { background: #2c3e50; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        nav ul { list-style: none; display: flex; gap: 1.5rem; }
+        nav a { color: #fff; text-decoration: none; font-weight: bold; }
+        .hero { background: #3498db; color: #fff; text-align: center; padding: 4rem 2rem; }
+        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .btn { display: inline-block; background: #2c3e50; color: #fff; padding: 0.7rem 1.5rem; text-decoration: none; border-radius: 5px; margin-top: 1rem; }
+        main { max-width: 1000px; margin: 2rem auto; padding: 0 2rem; }
+        section { background: #fff; padding: 2rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { margin-bottom: 1rem; color: #2c3e50; }
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        input, textarea { padding: 0.8rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        button { background: #3498db; color: #fff; border: none; padding: 0.8rem; font-size: 1rem; border-radius: 4px; cursor: pointer; }
+        .alert { background: #2ecc71; color: #fff; padding: 1rem; margin-bottom: 1rem; border-radius: 4px; text-align: center; font-weight: bold; }
+        footer { text-align: center; padding: 1.5rem; background: #2c3e50; color: #fff; }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <header>
         <h1>BrandName</h1>
         <nav>
@@ -117,32 +36,30 @@
         </nav>
     </header>
 
-    <!-- Hero Banner -->
     <div class="hero">
-        <h2>Welcome to My Website</h2>
-        <p>A clean, responsive starter template built with HTML and CSS.</p>
+        <h2>Welcome to My Flask Website</h2>
+        <p>Powered by Python and Flask.</p>
         <a href="#contact" class="btn">Get in Touch</a>
     </div>
 
-    <!-- Main Page Content -->
     <main>
+        <!-- Flash Message Display -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="alert">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
         <section id="about">
             <h2>About Us</h2>
-            <p>This is a sample paragraph explaining what your website or business does. You can replace this text with your own story, mission, or project details.</p>
-        </section>
-
-        <section id="services">
-            <h2>Our Services</h2>
-            <ul>
-                <li><strong>Web Design:</strong> Creating clean and modern layouts.</li>
-                <li><strong>Development:</strong> Building fast, responsive websites.</li>
-                <li><strong>SEO Optimization:</strong> Helping people find your site online.</li>
-            </ul>
+            <p>This webpage is dynamically served using Python's Flask framework.</p>
         </section>
 
         <section id="contact">
             <h2>Contact Us</h2>
-            <form action="#" method="POST">
+            <form action="/" method="POST">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <input type="email" name="email" placeholder="Your Email" required>
                 <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
@@ -151,7 +68,6 @@
         </section>
     </main>
 
-    <!-- Page Footer -->
     <footer>
         <p>&copy; 2026 BrandName. All rights reserved.</p>
     </footer>
